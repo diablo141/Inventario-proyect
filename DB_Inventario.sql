@@ -32,6 +32,24 @@ CREATE TABLE productos (
     REFERENCES categorias(id_categoria)
 );
 
+-- Insercionesde categorías y productos --
+INSERT INTO categorias (nombre_categoria, descripcion) VALUES
+('Bebidas', 'Bebidas frías'),
+('Helado', 'Variedades de helado'),
+('Café', 'Cafés y bebidas a base de café');
+
+-- Inserción de productos con sus respectivas categorías --
+INSERT INTO productos (nombre_producto, descripcion, precio, stock, stock_minimo, id_categoria) VALUES
+('Refresco Cola', 'Lata de refresco de cola de 355ml', 1.50, 50, 10, 1),
+('Agua Mineral', 'Botella de agua mineral de 500ml', 1.00, 80, 10, 1),
+('Té Helado', 'Té helado sabor durazno de 500ml', 1.75, 40, 10, 1),
+('Helado Vainilla', 'Cono de helado de vainilla', 2.50, 30, 5, 2),
+('Paleta de Fresa', 'Paleta helada sabor fresa', 1.75, 35, 5, 2),
+('Sundae Chocolate', 'Sundae de helado con salsa de chocolate', 3.25, 25, 5, 2),
+('Café Espresso', 'Café espresso fuerte en taza pequeña', 2.00, 45, 10, 3),
+('Capuchino', 'Café capuchino con espuma de leche', 2.75, 40, 10, 3),
+('Café Latte', 'Café latte con leche al vapor', 3.00, 35, 10, 3);  
+
 -- Tabla para proveedores de productos--
 CREATE TABLE proveedores (
     id_proveedor INT AUTO_INCREMENT PRIMARY KEY,

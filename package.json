@@ -1,5 +1,24 @@
 {
   "dependencies": {
     "dotenv": "^17.4.2"
-  }
+  },
+  "name": "inventario-proyect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diablo141/Inventario-proyect.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diablo141/Inventario-proyect/issues"
+  },
+  "homepage": "https://github.com/diablo141/Inventario-proyect#readme"
 }
