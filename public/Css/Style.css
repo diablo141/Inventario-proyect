@@ -160,6 +160,13 @@ body {
 .color-4 { color: #ec4899; }
 
 /* Tables */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    max-height: 400px;
+}
+
 .table-container {
     background: var(--white);
     border-radius: 12px;

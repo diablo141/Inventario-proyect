@@ -1,3 +1,4 @@
+create database gestion_tienda;
 use gestion_tienda;
 
 -- Tabla para usuarios del sistema--

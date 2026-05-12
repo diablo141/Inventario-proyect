@@ -2,9 +2,10 @@
  * SISTEMA DE GESTIÓN DE INVENTARIO - app.js
  */
 
+
 const app = {
     productos: [],
-    categorias: ['Electronica', 'Hogar', 'Ropa', 'Alimentos'],
+    categorias: ['bebidas', 'postres', 'comidacafe', 'otros'],
     ventas: [],
     chart: null,
 
@@ -63,7 +64,7 @@ const app = {
         document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
         document.getElementById(`${viewId}-view`).classList.remove('hidden');
     },
-
+ 
     // CRUD - Create / Update
     async guardarProducto() {
         const id = document.getElementById('productId').value;
@@ -86,7 +87,8 @@ const app = {
 
         this.syncStorage();
         this.closeModal();
-        this.renderAll();
+        this.renderTable();
+        this.updateStats();
         alert('Producto guardado correctamente');
     },
 
@@ -95,15 +97,20 @@ const app = {
         if (confirm('¿Estás seguro de eliminar este producto?')) {
             this.productos = this.productos.filter(p => p.id !== id);
             this.syncStorage();
-            this.renderAll();
+            this.renderTable();
+            this.updateStats();
+            alert('Producto eliminado');
         }
     },
 
     // RENDERERS
     renderAll() {
-        this.renderTable();
-        this.updateStats();
+    this.renderTable();
+    this.updateStats();
+
+    if (!this.chart) {
         this.renderChart();
+    }
     },
 
     renderTable(search = '', category = 'all') {
@@ -154,29 +161,59 @@ const app = {
             .join('');
     },
 
-    renderChart() {
-        const ctx = document.getElementById('salesChart').getContext('2d');
-        if (this.chart) this.chart.destroy();
+   renderChart() {
 
-        this.chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
-                datasets: [{
-                    label: 'Ventas 2026',
-                    data: [12000, 19000, 15000, 25000, 22000, 30000],
-                    borderColor: '#4f46e5',
-                    tension: 0.4,
-                    fill: true,
-                    backgroundColor: 'rgba(79, 70, 229, 0.1)'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } }
+    const ctx = document
+        .getElementById('salesChart')
+        .getContext('2d');
+
+    if (this.chart) {
+        this.chart.destroy();
+        this.chart = null;
+    }
+
+    this.chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Ventas 2026',
+                data: [12000, 19000, 15000, 25000, 22000, 30000],
+                borderColor: '#4f46e5',
+                backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
             }
-        });
+        }
+    });
+    },
+
+    actualizarGraficoVentas() {
+
+    if (!this.chart) return;
+
+    this.chart.data.labels = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'];
+
+    this.chart.data.datasets[0].data = [
+        12000,
+        19000,
+        15000,
+        25000,
+        22000,
+        30000
+    ];
+
+    this.chart.update();
     },
 
     // UTILS
