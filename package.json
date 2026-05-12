@@ -5,10 +5,16 @@
   "name": "inventario-proyect",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "devDependencies": {},
+  "main": "src/server.js",
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "vite": "^8.0.12"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node src/server.js",
+    "dev": "nodemon Gestion-Tienda\\src\\server.js"
   },
   "repository": {
     "type": "git",
